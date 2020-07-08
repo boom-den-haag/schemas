@@ -25,7 +25,9 @@
 
   <xs:complexType name="authorType">
     <xs:all>
-      <xs:element name="first-name" type="requiredString" />
+      <xs:element name="title" type="optionalString" minOccurs="0"/>
+      <xs:element name="initials" type="optionalString" minOccurs="0"/>
+      <xs:element name="first-name" type="optionalString" minOccurs="0"/>
       <xs:element name="middle-name" type="optionalString" minOccurs="0"/>
       <xs:element name="last-name" type="requiredString" />
     </xs:all>
@@ -81,7 +83,8 @@
       <xs:element name="authors" type="authorsType" minOccurs="0" />
       <xs:element name="taxonomy" type="taxonomyType" minOccurs="0" />
       <xs:element name="keywords" type="keywordsType" minOccurs="0" />
-</xs:all>
+    </xs:all>
+    <xs:attribute name="release" type="xs:string"/>
   </xs:complexType>
 
   <xs:element name="database-record" type="databaseRecordType"/>
