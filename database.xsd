@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:simpleType name="requiredString">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="optionalString">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="integerType">
+    <xs:restriction base="xs:positiveInteger"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="decimalType">
+    <xs:restriction base="xs:decimal"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="dateType">
+    <xs:restriction base="xs:date"/>
+  </xs:simpleType>
+
+  <xs:complexType name="authorType">
+    <xs:all>
+      <xs:element name="first-name" type="requiredString" />
+      <xs:element name="middle-name" type="optionalString" minOccurs="0"/>
+      <xs:element name="last-name" type="requiredString" />
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="authorsType">
+    <xs:sequence>
+      <xs:element name="author" type="authorType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="taxonomyType">
+    <xs:sequence>
+      <xs:element name="classification" type="requiredString" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="keywordsType">
+    <xs:sequence>
+      <xs:element name="keyword" type="requiredString" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="languageType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NL"/>
+      <xs:enumeration value="EN"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="databaseType">
+    <xs:all>
+      <xs:element name="id" type="requiredString" minOccurs="0" />
+      <xs:element name="name" type="requiredString" minOccurs="0" />
+      <xs:element name="url" type="requiredString" minOccurs="0" />
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="databaseRecordType">
+    <xs:all>
+      <xs:element name="database" type="databaseType"/>
+      <xs:element name="id" type="requiredString" />
+      <xs:element name="date" type="dateType" minOccurs="0"/>
+      <xs:element name="content-type" type="requiredString" minOccurs="0" />
+      <xs:element name="title" type="requiredString" minOccurs="0" />
+      <xs:element name="subtitle" type="requiredString" minOccurs="0" />
+      <xs:element name="publisher" type="requiredString" minOccurs="0" />
+      <xs:element name="url" type="requiredString" minOccurs="0" />
+      <xs:element name="open-access" type="xs:boolean" minOccurs="0" />
+      <xs:element name="language" type="languageType" minOccurs="0" />
+      <xs:element name="summary" type="requiredString" minOccurs="0" />
+      <xs:element name="contents" type="requiredString" minOccurs="0" />
+      <xs:element name="authors" type="authorsType" minOccurs="0" />
+      <xs:element name="taxonomy" type="taxonomyType" minOccurs="0" />
+      <xs:element name="keywords" type="keywordsType" minOccurs="0" />
+</xs:all>
+  </xs:complexType>
+
+  <xs:element name="database-record" type="databaseRecordType"/>
+
+</xs:schema>
